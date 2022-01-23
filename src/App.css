@@ -1,38 +1,123 @@
-.App {
+.app {
+  height: 100%;
   text-align: center;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+.app h2{
+  max-height: 8%;
+  margin-left: 10%;
+  margin-top: 60px;
+  margin-bottom: 30px;
+
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+.app form{
+  width: 26%;
+  margin-left: 37%;
+  margin-top: 30px;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+.app form input{
+  width: 100%;
+  display: inline-block;
 }
 
-.App-link {
-  color: #61dafb;
+.gallows {
+  width: 50%;
+  height: 400px;
+  margin-top: 70px;
+  position: relative;
+  left: 24%;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.leftTopLine {
+  border-left: 2px solid black;
+  border-top: 2px solid black;
+  display: inline-block;
+  width: 20%;
+  height: 80%;
+}
+
+.rightLine {
+  border-left: 2px solid black;
+  display: inline-block;
+  height: 17%;
+  position: relative;
+  bottom: 63.7%;
+  left: 0%;
+}
+
+.body {
+  width: 50%;
+  height: 300px;
+  position: absolute;
+  top: 31%;
+  left: 29.3%;
+}
+
+.head {
+  display: inline-block;
+  border: 2px solid black;
+  border-radius: 100%;
+  width: 8%;
+  height: 16%;
+}
+
+.cheast {
+  border-left: 2px solid black;
+  display: inline-block;
+  height: 22%;
+  position: relative;
+  top: 22%;
+  right: 4.5%;
+}
+
+.leftHand {
+  border-top: 2px solid black;
+  display: inline-block;
+  width: 7%;
+  position: relative;
+  top: 9%;
+  right: 18.7%;
+  transform: skewY(-40deg);
+}
+
+.rightHand {
+  border-top: 2px solid black;
+  display: inline-block;
+  width: 7%;
+  position: relative;
+  top: 9%;
+  right: 4.7%;
+  transform: skewY(40deg);
+}
+
+.leftLeg {
+  border-top: 2px solid black;
+  display: inline-block;
+  width: 7.5%;
+  position: relative;
+  top: 27%;
+  right: 26%;
+  transform: skewY(-40deg);
+}
+
+.rightLeg {
+  border-top: 2px solid black;
+  display: inline-block;
+  width: 7.5%;
+  position: relative;
+  top: 27%;
+  right: 26.2%;
+  transform: skewY(40deg);
+}
+
+.litters{
+  display: inline-block;
+  width: 9px;
+  margin: 3px;
+}
+
+.correctLitters{
+  align-content: center;
 }
