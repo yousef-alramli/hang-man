@@ -3,7 +3,7 @@
   text-align: center;
 }
 
-.app h2{
+.app h2 {
   max-height: 8%;
   margin-left: 10%;
   margin-top: 60px;
@@ -11,113 +11,136 @@
 
 }
 
-.app form{
+.app form {
   width: 26%;
   margin-left: 37%;
   margin-top: 30px;
 }
 
-.app form input{
+.app form input {
   width: 100%;
   display: inline-block;
 }
 
+.container {
+  margin: auto;
+  position: relative;
+  width: fit-content;
+}
+
 .gallows {
-  width: 50%;
-  height: 400px;
+  height: 350px;
   margin-top: 70px;
   position: relative;
-  left: 24%;
+  width: 180px;
 }
 
 .leftTopLine {
   border-left: 2px solid black;
   border-top: 2px solid black;
   display: inline-block;
-  width: 20%;
-  height: 80%;
+  height: 100%;
+  width: 100%;
 }
 
 .rightLine {
   border-left: 2px solid black;
   display: inline-block;
-  height: 17%;
-  position: relative;
-  bottom: 63.7%;
-  left: 0%;
+  height: 65px;
+  left: 100%;
+  position: absolute;
+  top: 0%;
+  width: 0;
+}
+
+.bottomLine {
+  border-top: 2px solid black;
+  position: absolute;
+  top: 100%;
+  right: 130px;
+  width: 100px;
 }
 
 .body {
-  width: 50%;
   height: 300px;
+  left: calc(100% - 25px);
   position: absolute;
-  top: 31%;
-  left: 29.3%;
+  top: 65px;
+  width: fit-content;
 }
 
 .head {
-  display: inline-block;
-  border: 2px solid black;
   border-radius: 100%;
-  width: 8%;
-  height: 16%;
+  border: 2px solid black;
+  display: inline-block;
+  height: 50px;
+  width: 50px;
 }
 
-.cheast {
+.chest {
   border-left: 2px solid black;
   display: inline-block;
-  height: 22%;
-  position: relative;
-  top: 22%;
-  right: 4.5%;
+  height: 90px;
+  position: absolute;
+  right: calc(50% - 1px);
+  top: 52px;
 }
 
 .leftHand {
   border-top: 2px solid black;
   display: inline-block;
-  width: 7%;
-  position: relative;
-  top: 9%;
-  right: 18.7%;
+  right: 50%;
+  position: absolute;
+  top: 90px;
   transform: skewY(-40deg);
+  width: 30px;
 }
 
 .rightHand {
   border-top: 2px solid black;
   display: inline-block;
-  width: 7%;
-  position: relative;
-  top: 9%;
-  right: 4.7%;
+  left: 50%;
+  position: absolute;
+  top: 90px;
   transform: skewY(40deg);
+  width: 30px;
 }
+
 
 .leftLeg {
   border-top: 2px solid black;
   display: inline-block;
-  width: 7.5%;
-  position: relative;
-  top: 27%;
-  right: 26%;
+  position: absolute;
+  right: 50%;
+  top: 152px;
   transform: skewY(-40deg);
+  width: 30px;
 }
 
 .rightLeg {
   border-top: 2px solid black;
   display: inline-block;
-  width: 7.5%;
-  position: relative;
-  top: 27%;
-  right: 26.2%;
+  position: absolute;
+  left: 50%;
+  top: 152px;
   transform: skewY(40deg);
+  width: 30px;
 }
 
-.litters{
+.litters {
   display: inline-block;
   width: 9px;
   margin: 3px;
 }
 
-.correctLitters{
+.correctAns {
+  margin-top: 32px;
+}
+
+.correctLitters {
   align-content: center;
+}
+
+.litters {
+  font-size: 18px;
 }

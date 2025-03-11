@@ -1,137 +1,131 @@
-import React, { Component } from 'react';
-import './App.css'
+import React, { useEffect, useState } from 'react';
+import './App.css';
 
 const allBody = [
-  <span className='head'></span>,
-  <span className='cheast'></span>,
-  <span className='rightHand'></span>,
-  <span className='leftHand'></span>,
-  <span className='leftLeg'></span>,
-  <span className='rightLeg'></span>
-]
+  <span key='head' className='head'></span>,
+  <span key='chest' className='chest'></span>,
+  <span key='rightHand' className='rightHand'></span>,
+  <span key='leftHand' className='leftHand'></span>,
+  <span key='leftLeg' className='leftLeg'></span>,
+  <span key='rightLeg' className='rightLeg'></span>
+];
 
-export class App extends Component {
-  constructor(props) {
-    super(props);
-    this.state = this.initialState();
-  }
+const App = () => {
+  const [word, setWord] = useState([]);
+  const [wrongAns, setWrongAns] = useState(0);
+  const [correctAns, setCorrectAns] = useState({});
+  const [allAns, setAllAns] = useState([]);
 
-  initialState = () => {
-    return {
-      word: [],
-      wrongAns: 0,
-      correctAns: {},
-      allAns: []
+  useEffect(() => {
+    window.addEventListener('keydown', checkInputs);
+
+    if (word.length) {
+      checkLoser();
+      setTimeout(() => {
+        checkWinner();
+      }, 0);
     }
+
+    return () => {
+      window.removeEventListener('keydown', checkInputs);
+    }
+  }, [correctAns, wrongAns, word]);
+
+  const resetState = () => {
+    setWord([]);
+    setWrongAns(0);
+    setCorrectAns({});
+    setAllAns([]);
   }
 
-  allLittersObj = (littersArr) => {
-    let obj = this.state.correctAns
+  const allLittersObj = (littersArr) => {
+    let obj = correctAns
     for (let i = 0; i < littersArr.length; i++) {
       obj[littersArr[i]] = 0
     };
-    this.setState({
-      correctAns: obj,
-    });
+    setCorrectAns(obj);
   };
 
-  checkLoser = (mistakes) => {
-    if (mistakes > 5) {
-      this.setState(this.initialState());
-      return alert("you lose");
+  const checkLoser = () => {
+    if (wrongAns > 5) {
+      alert('you lose');
+      resetState();
     };
   };
 
-  checkWinner = (correctObj) => {
-    for (const val in correctObj) {
-      if (correctObj[val] === 0) {
-        return;
-      };
-    };
-      this.setState(this.initialState());
-      return alert("you win");
+  const checkWinner = () => {
+    const isWinner = !Object.values(correctAns).includes(0);
+    if (!isWinner) {
+      return;
+    }
+    alert('you win');
+    resetState();
   };
 
-  checkInputs = (event, wrongAns, correct) => {
-    const littersArr = this.state.word;
-    let answers = this.state.allAns
+  const checkInputs = (event) => {
+    let answers = allAns
+    const key = event.key.toLowerCase();
 
-    if (littersArr.length !== 0 && event.key.length === 1) {
-      if (littersArr.includes(event.key)) {
-        correct[event.key] = 1
+    if (word.length !== 0 && key.length === 1) {
+      if (word.includes(key)) {
+        setCorrectAns({ ...correctAns, [key]: 1 })
       }
 
-      if (!answers.includes(event.key)) {
-        answers = [...answers, event.key]
-        if (!littersArr.includes(event.key)) {
-          wrongAns = wrongAns + 1
+      if (!answers.includes(key)) {
+        setAllAns([...answers, key]);
+
+        if (!word.includes(key)) {
+          setWrongAns(wrongAns + 1);
         }
       };
 
-      this.setState({
-        allAns: answers,
-        wrongAns: wrongAns
-      });
-      this.checkWinner(correct);
-      this.checkLoser(wrongAns);
     };
   }
 
-  componentDidMount = () => {
-
-    window.addEventListener("keydown", (event) => {
-      let wrongAns = this.state.wrongAns;
-      let correct = this.state.correctAns;
-      this.checkInputs(event, wrongAns, correct);
-    });
-  }
-
-  wordSubmit = (e) => {
+  const wordSubmit = (e) => {
     e.preventDefault();
-    const word = e.target.word.value.split('')
-    this.setState({
-      word: word
-    })
-    this.allLittersObj(word)
-    e.target.word.value = ""
+    const word = e.target.word.value.toLowerCase().split('');
+    setWord(word)
+    allLittersObj(word)
+    e.target.word.value = '';
   }
 
-  inRange = (n) => {
-    return [...Array(n).keys()]
+  const inRange = (n) => {
+    return [...Array(n).keys()];
   }
 
-  render() {
-    return (
-      <div className='app'>
-        {this.state.word != "" ? <h2>You can now start gussing by pressing any key</h2> :
-          <form className='wordForm' onSubmit={(e) => this.wordSubmit(e)}>
+  return (
+    <div className='app'>
+      {word.length ? <h2>You can now start guessing by pressing any key</h2> :
+        <form className='wordForm' onSubmit={(e) => wordSubmit(e)}>
           <label>Write your Word</label>
           <input name='word' type='text' />
           <button>START</button>
         </form>}
 
+      <div className='container'>
         <div className='gallows'>
           <span className='leftTopLine'></span>
           <span className='rightLine'></span>
+          <span className='bottomLine'></span>
         </div>
 
         <div className='body'>
           {
-            this.inRange(this.state.wrongAns).map(i => {
-              return allBody[i]
+            inRange(wrongAns).map(i => {
+              return allBody[i];
             })
           }
         </div>
-
-        <div className='correctAns'>
-          {this.state.word && this.state.word.map(litter => {
-            return <p className='litters'>{this.state.correctAns[litter] > 0 ? litter : "_"}</p>
-          })}
-        </div>
-
       </div>
-    );
-  }
+
+      <div className='correctAns'>
+        {word && word.map((litter, i) => {
+          return <p key={litter + i} className='litters'>{correctAns[litter] ? litter : '_' }</p>
+        })}
+      </div>
+    </div>
+  );
 }
 
-export default App;
+export default App
